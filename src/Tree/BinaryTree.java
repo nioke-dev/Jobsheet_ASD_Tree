@@ -15,6 +15,7 @@ public class BinaryTree {
         if (isEmpty()){ //Tree is empty
             root = new Node(data);
         }else{
+            // add row if tree is not null
             Node current = root;
             while (true){
                 if (data < current.data) {

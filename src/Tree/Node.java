@@ -5,7 +5,6 @@ public class Node {
     Node right;
 
     public Node(){
-
     }
 
     public Node(int data){

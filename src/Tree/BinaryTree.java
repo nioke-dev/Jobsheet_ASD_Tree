@@ -11,6 +11,61 @@ public class BinaryTree {
         return root == null;
     }
 
+    public int countLeafNodes(Node node) {
+        if (node == null) {
+            return 0;
+        }
+
+        if (node.left == null && node.right == null) {
+            return 1; // simpul daun ditemukan
+        }
+
+        int leftCount = countLeafNodes(node.left);
+        int rightCount = countLeafNodes(node.right);
+
+        return leftCount + rightCount;
+    }
+
+
+    public void displayLeafNodes(Node node) {
+        if (node == null) {
+            return;
+        }
+
+        if (node.left == null && node.right == null) {
+            System.out.print(node.data + " ");
+        }
+
+        displayLeafNodes(node.left);
+        displayLeafNodes(node.right);
+    }
+
+
+
+
+    void findMinMaxValues() {
+        if (root == null) {
+            System.out.println("Tree is empty");
+            return;
+        }
+
+        Node current = root;
+        while (current.left != null) {
+            current = current.left;
+        }
+        int minValue = current.data;
+
+        current = root;
+        while (current.right != null) {
+            current = current.right;
+        }
+        int maxValue = current.data;
+
+        System.out.println("Minimum value: " + minValue);
+        System.out.println("Maximum value: " + maxValue);
+    }
+
+
     void add(int data){
         if (isEmpty()){ //Tree is empty
             root = new Node(data);
@@ -37,6 +92,24 @@ public class BinaryTree {
                 }
             }
         }
+    }
+
+    void addRecursive(int data) {
+        root = addRecursive(root, data);
+    }
+
+    private Node addRecursive(Node current, int data) {
+        if (current == null) {
+            return new Node(data);
+        }
+
+        if (data < current.data) {
+            current.left = addRecursive(current.left, data);
+        } else if (data > current.data) {
+            current.right = addRecursive(current.right, data);
+        }
+
+        return current;
     }
 
     boolean find(int data){
